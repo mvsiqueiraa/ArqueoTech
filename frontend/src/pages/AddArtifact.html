@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Cadastrar Artefato - ArqueoTech</title>
+    <link rel="stylesheet" href="../css/artifact.css">
+</head>
+<body>
+<nav class="nav-content">
+    <div class="logo"><a href="index.html">ArqueoTech</a></div>
+    <ul class="nav-links">
+        <li><a href="index.html#treinamento">Identificação</a></li>
+        <li><a href="index.html#historia">História</a></li>
+        <li><a href="index.html#contato">Contato</a></li>
+        <li><a href="AddArtifact.html" class="active">+ Novo Artefato</a></li>
+        <li><a href="login.html" class="login-btn">Login</a></li>
+    </ul>
+</nav>
+
+    <main class="artifact-container">
+        <h1 class="section-title">📸 Registrar Novo Artefato</h1>
+        <p class="section-desc">Contribua com a comunidade arqueológica enviando fotos e localização de achados!</p>
+        <div class="upload-card">
+            <!-- Upload de Fotos -->
+            <div class="upload-section">
+                <input type="file" id="photoUpload" multiple accept="image/*">
+                <div id="imagePreview" class="preview-grid"></div>
+            </div>
+            <!-- Formulário de Dados -->
+            <div class="form-section">
+                <div class="form-group">
+                    <label for="description">Descrição:</label>
+                    <textarea id="description" rows="3"></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Localização:</label>
+                    <button type="button" onclick="getLocation()" class="gps-button">
+                        🛰 Obter Localização Atual
+                    </button>
+                    <div id="locationStatus" class="location-status"></div>
+                </div>
+                <div class="form-group">
+                    <label>
+                        <input type="checkbox" id="isPublic"> Tornar público
+                    </label>
+                </div>
+                <button onclick="submitArtifact()" class="submit-btn">
+                    🚀 Enviar para Análise
+                </button>
+            </div>
+        </div>
+    </main>
+    <script src="../js/artifactUpload.js"></script>
+</body>
+</html>

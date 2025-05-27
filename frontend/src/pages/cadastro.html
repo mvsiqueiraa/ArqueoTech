@@ -1,0 +1,102 @@
+<!-- 
+Init: 22/12/24
+Update: 26/02/25 
+Objective: Cadastro page of the application 
+-->
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <link rel="icon" type="image/png" href="../../public/assets/images/favicon.png">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ArqueoTech - Cadastro</title>
+    <link rel="stylesheet" href="../css/auth.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+</head>
+<body>
+    <div class="auth-page">
+        <button onclick="window.location.href='index.html'" class="back-button">
+            Voltar
+        </button>
+        <h1 class="site-title">ArqueoTech</h1>
+        
+        <div class="auth-container">
+            <div class="auth-box">
+                <h2>Criar Conta</h2>
+                <form id="registerForm">
+                    <div class="form-group">
+                        <input 
+                            type="text" 
+                            id="fullName" 
+                            required 
+                            placeholder="Nome completo"
+                        >
+                        
+                    </div>
+
+                    <div class="form-group">
+                        <input 
+                            type="email" 
+                            id="email" 
+                            required 
+                            placeholder="Email"
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <input 
+                            type="text" 
+                            id="institution" 
+                            required 
+                            placeholder="Instituição ou Sociedade Civi"
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <input 
+                            type="password" 
+                            id="password" 
+                            required 
+                            placeholder="Senha"
+                            autocomplete="new-password"
+                        >
+                        <small class="password-hint">
+                            Mínimo 8 caracteres, incluindo letra maiúscula e número
+                        </small>
+                    </div>
+
+                    <div class="form-group">
+                        <input 
+                            type="password" 
+                            id="confirmPassword" 
+                            required 
+                            placeholder="Confirmar senha"
+                        >
+                    </div>
+
+                    <button type="submit" class="primary-button">
+                        Criar Conta
+                    </button>
+                </form>
+
+                <div class="divider">
+                    <span>ou</span>
+                </div>
+
+                <button class="google-button">
+                    <img src="../../public/assets/images/google-icon.png" alt="Google">
+                    <span>Cadastrar com Google</span>
+                </button>
+
+                <p class="auth-link">
+                    Já tem uma conta? <a href="login.html">Faça login</a>
+                </p>
+            </div>
+        </div>
+    </div>
+<!-- No final do body de login.html e register.html -->
+<script src="../js/api.js" defer></script>
+<script src="../js/auth.js" defer></script>
+</body>
+</html>

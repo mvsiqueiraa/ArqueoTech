@@ -1,0 +1,917 @@
+/* Reset and Variables */
+:root {
+    --primary-color: #6f4827;
+    --text-color: #ffffff;
+    --accent-color: #9DC183;
+    --accent-hover: #9DC190;
+    --dark-brown: #4a301f; /* Nova variável para tons mais escuros */
+    --light-cream: #fdfdfd; /* Cor para o fundo da seção história */
+    --soft-green: rgba(157, 193, 131, 0.2); /* Verde suave para o gradiente */
+    --soft-brown: rgba(111, 72, 39, 0.1); /* Marrom suave para o gradiente */
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    overflow-x: hidden;
+    scroll-behavior: smooth; /* Adiciona rolagem suave para âncoras */
+}
+
+body {
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    padding-top: 60px; /* Espaço para a navbar fixa, ajustado para a altura da nav */
+    background: rgba(111, 72, 39, 0.85); /* Fundo branco em todo o site */
+    font-family: 'Poppins', sans-serif; /* Garante a fonte em todo o body */
+    color: #333; /* Cor de texto padrão para o body */
+}
+
+/* Navigation */
+.username {
+    color: #fff;
+    padding: 8px 15px;
+    font-weight: 500;
+}
+
+nav {
+    background-color: var(--primary-color);
+    padding: 0.8rem 0;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    transition: transform 0.3s ease-in-out;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2); /* Sutil sombra para destacar a nav */
+}
+
+.nav-hidden {
+    transform: translateY(-100%);
+}
+
+.nav-visible {
+    transform: translateY(0);
+}
+
+.nav-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 2rem;
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+    color: var(--text-color);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.logo:hover {
+    transform: scale(1.05);
+    text-shadow: 0 0 10px rgba(255,255,255,0.5);
+}
+
+.nav-links {
+    display: flex;
+    list-style: none;
+    gap: 2rem;
+}
+
+.nav-links a {
+    color: var(--text-color);
+    text-decoration: none;
+    font-weight: 600;
+    position: relative;
+    padding: 5px 0;
+    transition: all 0.3s ease;
+}
+
+.nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: var(--text-color);
+    transition: width 0.3s ease;
+}
+
+.nav-links a:hover::after,
+.nav-links a.active::after { /* Adiciona estilo para link ativo */
+    width: 100%;
+}
+
+.nav-links a:hover,
+.nav-links a.active { /* Adiciona estilo para link ativo */
+    transform: translateY(-2px);
+    color: var(--accent-color); /* Muda a cor ao passar o mouse/ativo */
+}
+
+/* Sections */
+section {
+    padding: 4rem 2rem; /* Aumenta o padding para melhor espaçamento */
+    min-height: calc(100vh - 60px); /* Ajusta a altura mínima */
+    display: flex; /* Para centralizar conteúdo verticalmente se necessário */
+    align-items: center; /* Centraliza verticalmente */
+    justify-content: center; /* Centraliza horizontalmente */
+}
+
+#treinamento {
+    background: linear-gradient(rgba(111, 72, 39, 0.85), rgba(111, 72, 39, 0.85)),
+                url('../../public/assets/images/background.jpg') no-repeat center center;
+    background-size: cover;
+    background-attachment: fixed;
+    color: var(--text-color);
+    flex-direction: column; /* Garante que os elementos internos se empilhem */
+}
+
+
+/* IA Container and Components */
+.ia-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
+    gap: 2rem;
+    padding: 2rem;
+    width: 100%;
+    max-width: 1200px; /* Limita a largura para melhor leitura */
+    background: rgba(255, 255, 255, 0.05); /* Fundo sutil para o container */
+    border-radius: 15px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+    backdrop-filter: blur(5px);
+    border: 1px solid rgba(255,255,255,0.1);
+}
+
+.webcam-section {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    min-width: 300px; /* Garante um tamanho mínimo */
+}
+
+.section-title {
+    text-align: center;
+    margin-bottom: 2rem;
+    width: 100%; /* Garante que o título ocupe a largura total */
+}
+
+.section-title h2 {
+    color: #ffffff;
+    font-size: 2.8rem; /* Aumenta o tamanho da fonte */
+    font-weight: 700; /* Mais negrito */
+    margin: 0;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3); /* Sombra para o texto */
+}
+
+.input-options {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    flex-wrap: wrap; /* Permite que os botões quebrem a linha em telas pequenas */
+}
+
+/* Buttons */
+.webcam-section button,
+.input-options button {
+    padding: 12px 28px; /* Aumenta o padding */
+    background-color: var(--accent-color);
+    color: var(--text-color);
+    border: none;
+    border-radius: 8px; /* Cantos mais arredondados */
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: 600; /* Texto mais negrito */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2); /* Sombra para os botões */
+}
+
+.webcam-section button:hover,
+.input-options button:hover {
+    background-color: var(--accent-hover);
+    transform: translateY(-3px); /* Efeito de "levantar" */
+    box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+}
+
+/* Tooltip para botões desabilitados */
+[title] {
+    position: relative;
+    cursor: not-allowed; /* Indica que não pode ser clicado */
+}
+
+[title]:hover::after {
+    content: attr(title);
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-10px); /* Ajusta a posição da tooltip */
+    padding: 8px 12px;
+    background: rgba(0, 0, 0, 0.85); /* Fundo mais escuro */
+    color: white;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    white-space: nowrap;
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+[title]:hover::after {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(0);
+}
+
+
+/* Results Section */
+.results-section {
+    flex: 1;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 2rem;
+    border-radius: 10px;
+    backdrop-filter: blur(5px);
+    display: flex;
+    flex-direction: column;
+    gap: 1rem; /* Espaçamento entre os itens de resultado */
+}
+
+.results-section h3 {
+    color: var(--text-color);
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+    text-align: center;
+}
+
+.result-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.result-label {
+    color: var(--text-color);
+    font-weight: 500;
+    font-size: 1.1rem;
+}
+
+.progress-bar {
+    background: rgba(255, 255, 255, 0.1);
+    height: 25px; /* Altura um pouco menor */
+    border-radius: 5px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.2); /* Sombra interna para profundidade */
+}
+
+.progress {
+    height: 100%;
+    background: linear-gradient(to right, var(--accent-color), #7a9a6b); /* Gradiente no progresso */
+    transition: width 0.5s ease-out; /* Transição mais suave */
+    border-radius: 5px;
+}
+
+.percentage {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-color);
+    font-weight: bold;
+    font-size: 0.9rem;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+}
+
+/* Webcam and Image Preview */
+#webcam-container {
+    width: 400px;
+    height: 400px;
+    border-radius: 10px;
+    overflow: hidden;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#webcam-container canvas {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Garante que a webcam preencha o container */
+}
+
+#imagePreview {
+    margin: 1rem 0;
+    min-height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-width: 400px; /* Limita a largura da pré-visualização */
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+#imagePreview img {
+    max-width: 100%;
+    max-height: 400px; /* Limita a altura da imagem para não esticar muito */
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+/* Footer */
+footer {
+    background-color: #333;
+    color: var(--text-color);
+    text-align: center;
+    padding: 1rem;
+    width: 100%;
+    margin-top: auto;
+}
+
+/* Seção História */
+#historia {
+    /* Novo fundo que conversa com as cores do tema */
+    background: linear-gradient(135deg, var(--soft-brown), var(--light-cream), var(--soft-brown));
+    color: #333; /* Cor de texto para a seção */
+    padding: 6rem 2rem; /* Mais padding */
+}
+
+.historia-content {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr; /* Ajusta a proporção entre slider e texto */
+    gap: 4rem; /* Aumenta o espaçamento entre as colunas */
+    max-width: 1200px;
+    margin: 0 auto;
+    align-items: center;
+    box-shadow: 0 15px 30px rgba(0,0,0,0.1); /* Sombra mais pronunciada para a seção */
+    border-radius: 20px;
+    background: #fff; /* Fundo branco para o conteúdo interno */
+    padding: 3rem;
+}
+
+.slider-container {
+    position: relative;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2); /* Sombra para o container do slider */
+    background-color: var(--dark-brown); /* Fundo escuro para o slider */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 400px; /* Garante altura mínima */
+    border: 3px solid var(--primary-color); /* Borda mais grossa */
+}
+
+.slider {
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+    border-radius: 10px;
+    /* Adiciona uma sombra interna para dar profundidade */
+    box-shadow: inset 0 0 15px rgba(0,0,0,0.5); 
+}
+
+.slides {
+    display: flex; /* Essencial para o transform: translateX */
+    width: 100%;
+    transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94); /* Transição mais suave e dinâmica */
+}
+
+.slide {
+    min-width: 100%; /* Garante que cada slide ocupe 100% da largura */
+    height: 400px; /* Altura fixa para manter proporção */
+    display: flex; /* Para centralizar a imagem dentro do slide */
+    justify-content: center;
+    align-items: center;
+    position: relative; /* Para posicionar a legenda */
+    background-color: #333; /* Fundo escuro para slides vazios/carregando */
+    /* Removido display: none/block, agora todos os slides são flex-items */
+}
+
+.slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 10px;
+    filter: brightness(0.85); /* Leve escurecimento para a imagem */
+    transition: filter 0.3s ease; /* Transição para o brilho */
+}
+
+.slide.active img {
+    filter: brightness(1); /* Brilho normal no slide ativo */
+}
+
+.slide-caption {
+    position: absolute;
+    bottom: 1.5rem;
+    left: 1.5rem;
+    color: white;
+    display: flex;
+    flex-direction: column; /* Empilha número e texto */
+    align-items: flex-start; /* Alinha à esquerda */
+    gap: 0.2rem; /* Reduz o espaçamento */
+    background: linear-gradient(to right, rgba(0,0,0,0.8), rgba(0,0,0,0.4)); /* Gradiente na legenda */
+    padding: 0.8rem 1.2rem; /* Mais padding */
+    border-radius: 10px; /* Mais arredondado */
+    font-size: 1.1rem; /* Levemente maior */
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.8); /* Sombra para o texto */
+    backdrop-filter: blur(2px); /* Efeito de desfoque */
+}
+
+.caption-number {
+    font-size: 2.5rem; /* Tamanho maior para o número */
+    font-weight: bold;
+    color: var(--accent-color); /* Cor de destaque */
+    line-height: 1; /* Ajusta a altura da linha */
+}
+
+.slide-caption p {
+    margin: 0; /* Remove margem padrão do parágrafo */
+    font-size: 1rem; /* Tamanho do texto da legenda */
+}
+
+.slider-nav {
+    position: absolute;
+    bottom: 1rem; /* Posiciona a navegação abaixo do slider */
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 1.5rem; /* Aumenta o espaçamento entre botões e pontos */
+    align-items: center;
+    z-index: 3; /* Garante que os botões e pontos fiquem acima dos slides */
+}
+
+.prev, .next {
+    cursor: pointer;
+    width: 0%; /* Tamanho maior para botões */
+    height: 50px;
+    background-color: var(--primary-color); /* Cor dos botões */
+    color: white;
+    border: none;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.8rem; /* Tamanho maior para as setas */
+    transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 6px 12px rgba(0,0,0,0.4); /* Sombra mais forte */
+}
+
+.prev:hover, .next:hover {
+    background-color: var(--accent-color);
+    transform: scale(1.15) translateY(-2px); /* Efeito de "levantar" e aumentar */
+    box-shadow: 0 8px 16px rgba(0,0,0,0.5);
+}
+
+.slider-dots {
+    display: flex;
+    gap: 0.6rem; /* Aumenta o espaçamento entre os pontos */
+}
+
+.dot {
+    width: 14px; /* Tamanho dos pontos */
+    height: 14px;
+    background-color: rgba(255, 255, 255, 0.6); /* Cor dos pontos inativos */
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease, border-color 0.3s ease;
+    border: 2px solid rgba(255,255,255,0.8); /* Borda para os pontos */
+}
+
+.dot.active {
+    background-color: var(--accent-color); /* Cor do ponto ativo */
+    transform: scale(1.3); /* Aumenta o tamanho do ponto ativo */
+    border-color: var(--primary-color); /* Borda do ponto ativo */
+    box-shadow: 0 0 8px var(--accent-color); /* Brilho no ponto ativo */
+}
+
+
+.historia-texto {
+    color: var(--primary-color); /* Cor de texto principal para a história */
+}
+
+.section-tag {
+    color: var(--accent-color);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: 0.95rem; /* Levemente maior */
+    font-weight: 600;
+}
+
+.title-large {
+    font-size: 4.2rem; /* Aumenta o tamanho do título */
+    line-height: 1.1;
+    margin: 1.5rem 0 2rem;
+    color: #333; /* Cor mais escura para o título */
+    font-weight: 800; /* Mais negrito */
+}
+
+.text-highlight {
+    font-size: 1.15rem; /* Reduzido para se adequar ao resumo */
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+    font-weight: 500;
+    color: var(--primary-color); /* Ajusta a cor para harmonizar com o novo fundo */
+}
+
+.text-content p {
+    font-size: 0.95rem; /* Reduzido para se adequar ao resumo */
+    line-height: 1.7;
+    margin-bottom: 1rem;
+    color: #555; /* Cor de texto mais suave */
+}
+
+.text-columns {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+/* Seção de Contato */
+#contato {
+    background: linear-gradient(135deg, var(--primary-color), var(--dark-brown)); /* Gradiente mais escuro */
+    color: var(--text-color);
+    padding: 6rem 2rem;
+}
+
+.contato-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem; /* Aumenta o espaçamento */
+    max-width: 1200px;
+    margin: 0 auto;
+    background: rgba(255, 255, 255, 0.05); /* Fundo sutil */
+    border-radius: 15px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+    backdrop-filter: blur(5px);
+    border: 1px solid rgba(255,255,255,0.1);
+    padding: 3rem;
+}
+
+.info-contato, .localizacao {
+    padding: 0; /* Remove padding extra, já está no container */
+}
+
+.info-contato h2, .localizacao h2 {
+    font-size: 2.8rem;
+    margin-bottom: 2rem;
+    color: var(--text-color);
+    font-weight: 700;
+}
+
+.email-info {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.email-info h3 {
+    margin-bottom: 1.2rem;
+    font-size: 1.3rem;
+    color: var(--accent-color);
+}
+
+.email-info a {
+    display: block;
+    color: var(--text-color); /* Cor do texto do email */
+    text-decoration: none;
+    margin: 0.8rem 0;
+    font-size: 1.1rem;
+    transition: color 0.3s ease;
+}
+
+.email-info a:hover {
+    color: var(--accent-hover);
+    text-decoration: underline;
+}
+
+.mapa {
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+    height: 400px; /* Altura fixa para o mapa */
+}
+
+.mapa iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+/* About Platform Section */
+.about-platform {
+    background: linear-gradient(135deg, var(--primary-color), var(--dark-brown)); /* Gradiente de fundo */
+    color: var(--text-color);
+    border-radius: 20px; /* Mais arredondado */
+    box-shadow: 0 15px 30px rgba(0,0,0,0.2); /* Sombra mais forte */
+    margin: 4rem auto; /* Mais margem */
+    max-width: 1000px; /* Aumenta a largura máxima */
+    padding: 3.5rem 2rem; /* Mais padding */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: auto; /* Remove altura mínima fixa */
+}
+
+.about-title {
+    color: var(--text-color); /* Cor do título */
+    font-size: 2.8rem; /* Aumenta o tamanho */
+    font-weight: 800; /* Mais negrito */
+    margin-bottom: 1.5rem;
+    text-align: center;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+}
+
+.about-desc {
+    color: #f0f0f0; /* Cor de texto mais clara */
+    font-size: 1.25rem; /* Aumenta o tamanho */
+    line-height: 1.8;
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.about-highlight {
+    color: var(--accent-color);
+    font-weight: 700; /* Mais negrito */
+}
+
+.about-features {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1.5rem; /* Mais espaçamento */
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.about-features li {
+    background: rgba(255,255,255,0.15); /* Fundo mais transparente */
+    border-radius: 15px; /* Mais arredondado */
+    padding: 1rem 1.5rem; /* Mais padding */
+    color: #fff;
+    font-size: 1.05rem;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1); /* Sombra mais suave */
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    transition: transform 0.3s ease, background 0.3s ease;
+}
+
+.about-features li:hover {
+    transform: translateY(-5px);
+    background: rgba(255,255,255,0.25); /* Fundo mais opaco no hover */
+}
+
+
+/* Media Queries */
+@media (max-width: 1024px) {
+    .historia-content {
+        grid-template-columns: 1fr; /* Colunas empilhadas em telas menores */
+        padding: 2rem;
+        gap: 3rem;
+    }
+
+    .slider-container {
+        margin-right: 0; /* Remove margem negativa */
+        max-width: 100%; /* Ocupa largura total */
+    }
+
+    .historia-texto {
+        margin-left: 0; /* Remove margem negativa */
+        padding: 0; /* Remove padding extra */
+        text-align: center; /* Centraliza o texto */
+    }
+
+    .text-columns {
+        grid-template-columns: 1fr; /* Uma coluna para o texto */
+        text-align: left; /* Alinha o texto à esquerda */
+    }
+
+    .title-large {
+        font-size: 3.5rem; /* Ajusta o tamanho da fonte */
+    }
+
+    .contato-content {
+        grid-template-columns: 1fr;
+        padding: 2rem;
+    }
+
+    .info-contato h2, .localizacao h2 {
+        font-size: 2rem;
+    }
+
+    .about-platform {
+        margin: 2rem auto;
+        padding: 2rem 1rem;
+    }
+
+    .about-title {
+        font-size: 2rem;
+    }
+
+    .about-desc {
+        font-size: 1.1rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .nav-links {
+        display: none; /* Esconde a navegação em telas muito pequenas */
+    }
+    
+    .ia-container {
+        flex-direction: column;
+        padding: 1rem;
+    }
+    
+    .webcam-section,
+    .results-section {
+        width: 100%;
+        min-width: unset; /* Remove min-width */
+    }
+
+    .section-title h2 {
+        font-size: 2rem;
+    }
+
+    .input-options button {
+        padding: 10px 20px;
+        font-size: 0.9rem;
+    }
+
+    #webcam-container, #imagePreview {
+        width: 100%;
+        max-width: 300px; /* Limita a largura em mobile */
+        height: 300px;
+    }
+
+    .historia-content {
+        padding: 2rem 1rem;
+        gap: 2rem;
+    }
+
+    .title-large {
+        font-size: 2.8rem;
+    }
+
+    .text-highlight {
+        font-size: 1.1rem;
+    }
+
+    .text-content p {
+        font-size: 0.95rem;
+    }
+
+    .contato-content {
+        padding: 1.5rem;
+    }
+
+    .info-contato h2, .localizacao h2 {
+        font-size: 1.8rem;
+    }
+
+    .email-info, .mapa {
+        padding: 1.5rem;
+    }
+
+    .email-info h3 {
+        font-size: 1.1rem;
+    }
+
+    .email-info a {
+        font-size: 1rem;
+    }
+
+    .about-title {
+        font-size: 1.6rem;
+    }
+
+    .about-desc {
+        font-size: 0.95rem;
+    }
+
+    .about-features li {
+        font-size: 0.8rem;
+        padding: 0.5rem 0.8rem;
+    }
+}
+
+@media (max-width: 480px) {
+    body {
+        padding-top: 50px; /* Ajusta para navbar menor */
+    }
+    nav {
+        padding: 0.6rem 0;
+    }
+    .logo {
+        font-size: 20px;
+    }
+    section {
+        padding: 2rem 1rem;
+    }
+    .section-title h2 {
+        font-size: 1.8rem;
+    }
+    .ia-container {
+        padding: 0.8rem;
+    }
+    .input-options {
+        flex-direction: column;
+        gap: 0.8rem;
+    }
+    .input-options button {
+        width: 100%;
+    }
+    .results-section {
+        padding: 1.5rem;
+    }
+    .historia-content {
+        padding: 1rem;
+    }
+    .title-large {
+        font-size: 2.2rem;
+    }
+    .text-highlight {
+        font-size: 1rem;
+    }
+    .text-content p {
+        font-size: 0.9rem;
+    }
+    .contato-content {
+        padding: 1rem;
+    }
+    .info-contato h2, .localizacao h2 {
+        font-size: 1.5rem;
+    }
+    .email-info, .mapa {
+        padding: 1rem;
+    }
+    .about-title {
+        font-size: 1.4rem;
+    }
+    .about-desc {
+        font-size: 0.85rem;
+    }
+    .about-features li {
+        font-size: 0.8rem;
+        padding: 0.5rem 0.8rem;
+    }
+}
+/* Estilos para a Message Box */
+.message-box {
+    position: fixed;
+    top: 80px; /* Abaixo da navbar */
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 15px 25px;
+    border-radius: 8px;
+    color: white;
+    font-weight: 600;
+    z-index: 10000;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    opacity: 0;
+    animation: fadeInOut 3s forwards;
+    min-width: 250px;
+    text-align: center;
+}
+
+.message-box.info {
+    background-color: var(--info-color);
+}
+
+.message-box.success {
+    background-color: var(--success-color);
+}
+
+.message-box.warning {
+    background-color: var(--warning-color);
+}
+
+.message-box.error {
+    background-color: var(--error-color);
+}
+
+@keyframes fadeInOut {
+    0% { opacity: 0; transform: translateX(-50%) translateY(-20px); }
+    10% { opacity: 1; transform: translateX(-50%) translateY(0); }
+    90% { opacity: 1; transform: translateX(-50%) translateY(0); }
+    100% { opacity: 0; transform: translateX(-50%) translateY(-20px); }
+}

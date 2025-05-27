@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <link rel="icon" type="image/png" href="../../public/assets/images/favicon.png">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ArqueoTech - Identificação de Artefatos</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@latest/dist/teachablemachine-image.min.js"></script>
+</head>
+<body>
+    <nav>
+        <div class="nav-content">
+            <div class="logo">ArqueoTech</div>
+            <ul class="nav-links">
+                <li><a href="identificacao.html" class="active">Identificação</a></li>
+                <li><a href="AddArtifact.html" id="addArtifactLink">Novo Artefato</a></li>
+                <li><a href="index.html#historia">História</a></li>
+                <li><a href="index.html#contato">Contato</a></li>
+                <li id="userSection">
+                    </li>
+            </ul>
+        </div>
+    </nav>
+
+<!-- Seção de Treinamento -->
+<section id="treinamento">
+    <div class="section-title">
+        <h2>Identificação de Vasos de Gargalo e de Cariátides</h2>
+    </div>
+    
+    <div class="ia-container">
+        <div class="input-options">
+            <button type="button" id="toggleButton" onclick="toggleCamera()" 
+    title="É necessário fazer login para usar esta função">
+                Iniciar Câmera
+            </button>
+            <input type="file" id="imageInput" accept="image/*" style="display: none">
+            <button type="button" onclick="document.getElementById('imageInput').click()"
+    title="É necessário fazer login para usar esta função">
+                Selecionar Imagem
+            </button>
+        </div>        
+        
+        <div class="webcam-section">
+            <div id="webcam-container"></div>
+            <div id="imagePreview"></div>
+        </div>
+        
+        <div class="results-section">
+            <h3>Resultados da Análise</h3>
+            <div id="dynamic-results"></div>
+        </div>
+    </div>
+</section>
+
+
+    <footer>
+        <p>Desenvolvido por mvsiqueira © 2025</p>
+    </footer>
+
+    <script src="../js/api.js" defer></script>
+    <script src="../js/auth.js" defer></script>
+    <script src="../js/teachable.js"></script>
+    <script>
+        // Script para esconder/mostrar navbar ao rolar
+        let lastScrollY = window.scrollY;
+        let isMouseOverNav = false;
+    
+        document.querySelector('nav').addEventListener('mouseover', () => {
+            isMouseOverNav = true;
+            document.querySelector('nav').classList.remove('nav-hidden');
+        });
+    
+        document.querySelector('nav').addEventListener('mouseout', () => {
+            isMouseOverNav = false;
+        });
+    
+        window.addEventListener('scroll', () => {
+            if (!isMouseOverNav) {
+                if (window.scrollY > lastScrollY) { 
+                    document.querySelector('nav').classList.add('nav-hidden');
+                } else { 
+                    document.querySelector('nav').classList.remove('nav-hidden');
+                }
+            }
+            lastScrollY = window.scrollY;
+        });
+    </script>
+</body>
+</html>
