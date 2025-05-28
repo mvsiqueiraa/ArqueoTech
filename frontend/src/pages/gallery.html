@@ -2,62 +2,130 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Galeria de Artefatos - ArqueoTech</title>
-    <link rel="stylesheet" href="../css/artifact.css">
-    <style>
-        .gallery-container {
+    <link rel="icon" type="image/png" href="../../public/assets/images/favicon.png">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/styles.css"> <link rel="stylesheet" href="../css/artifact.css"> <style>
+        /* Estilos adicionais específicos para a galeria podem ir aqui ou em artifact.css */
+        body {
+            background: linear-gradient(rgba(111, 72, 39, 0.85), rgba(111, 72, 39, 0.85)),
+                        url('../../public/assets/images/background.jpg') no-repeat center center;
+            background-size: cover;
+            background-attachment: fixed;
+            color: var(--text-light);
+        }
+        .gallery-page-container {
             max-width: 1200px;
             margin: 2rem auto;
-            padding: 1rem;
+            padding: 2rem 1rem;
+            min-height: calc(100vh - 60px - 4rem); /* Altura da navbar e padding do footer */
+        }
+        .gallery-page-container h1 {
+            font-size: 2.5rem;
+            color: var(--text-light);
+            text-align: center;
+            margin-bottom: 2rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
         }
         .gallery-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); /* Ajuste o minmax conforme necessário */
             gap: 2rem;
         }
         .artifact-card {
-            background: rgba(255,255,255,0.1);
+            background: var(--glass-bg, rgba(255,255,255,0.1));
             border-radius: 15px;
-            padding: 1rem;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            padding: 1.5rem;
+            box-shadow: 0 4px 15px var(--glass-shadow, rgba(0,0,0,0.12));
+            backdrop-filter: blur(5px);
+            border: 1px solid var(--glass-border, rgba(255,255,255,0.18));
             display: flex;
             flex-direction: column;
             align-items: center;
-            transition: box-shadow 0.2s;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            color: var(--text-light); /* Cor do texto dentro do card */
         }
         .artifact-card:hover {
-            box-shadow: 0 4px 16px rgba(0,0,0,0.16);
+            transform: translateY(-5px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+        }
+        .artifact-img-container {
+            width: 100%;
+            height: 200px; /* Altura fixa para a imagem */
+            margin-bottom: 1rem;
+            border-radius: 10px;
+            overflow: hidden; /* Garante que a imagem não ultrapasse as bordas arredondadas */
+            background-color: rgba(0,0,0,0.1); /* Fundo para caso a imagem não carregue */
         }
         .artifact-img {
             width: 100%;
-            max-width: 220px;
-            height: 180px;
-            object-fit: cover;
-            border-radius: 10px;
-            margin-bottom: 0.8rem;
+            height: 100%;
+            object-fit: cover; /* Garante que a imagem cubra o container mantendo a proporção */
         }
         .artifact-desc {
-            font-size: 1rem;
-            color: #222;
-            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+            color: var(--text-light);
+            margin-bottom: 0.75rem;
+            text-align: center;
+            font-weight: 600;
         }
-        .artifact-meta {
+        .artifact-meta, .artifact-location, .artifact-user {
             font-size: 0.9rem;
-            color: #6f4827;
-            margin-bottom: 0.3rem;
+            color: #e0e0e0; /* Um pouco mais claro para metadados */
+            margin-bottom: 0.4rem;
+            text-align: center;
         }
-        .artifact-location {
-            font-size: 0.85rem;
-            color: #888;
+        .artifact-user strong {
+            color: var(--accent-color);
+        }
+        .loading-message, .empty-message, .error-message {
+            text-align: center;
+            font-size: 1.2rem;
+            padding: 2rem;
+            color: var(--text-light);
+        }
+
+        /* Responsividade para a galeria */
+        @media (max-width: 600px) {
+            .gallery-grid {
+                grid-template-columns: 1fr; /* Uma coluna em telas pequenas */
+            }
+            .gallery-page-container h1 {
+                font-size: 2rem;
+            }
         }
     </style>
 </head>
 <body>
-    <nav> <!-- Seu menu aqui --> </nav>
-    <main class="gallery-container">
+    <nav>
+        <div class="nav-content">
+            <div class="logo"><a href="index.html" style="text-decoration: none; color: inherit;">ArqueoTech</a></div>
+            <ul class="nav-links">
+                <li><a href="identificacao.html">Identificação</a></li>
+                <li><a href="AddArtifact.html" id="addArtifactLink">Novo Artefato</a></li>
+                <li><a href="gallery.html" class="active">Galeria</a></li>
+                <li><a href="index.html#historia">História</a></li>
+                <li><a href="index.html#contato">Contato</a></li>
+                <li id="userSection">
+                    </li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="gallery-page-container">
         <h1>🌎 Galeria Pública de Artefatos</h1>
-        <div id="gallery" class="gallery-grid"></div>
+        <div id="gallery" class="gallery-grid">
+            <p class="loading-message">Carregando artefatos...</p>
+        </div>
     </main>
+
+    <footer>
+        <p>Desenvolvido por mvsiqueira © 2025</p>
+    </footer>
+
+    <script src="../js/api.js" defer></script>
+    <script src="../js/auth.js" defer></script>
     <script src="../js/gallery.js"></script>
 </body>
 </html>

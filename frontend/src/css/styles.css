@@ -373,7 +373,7 @@ footer {
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 400px; /* Garante altura mínima */
+    min-height: 600px; /* Garante altura mínima */
     border: 3px solid var(--primary-color); /* Borda mais grossa */
 }
 
@@ -394,7 +394,7 @@ footer {
 
 .slide {
     min-width: 100%; /* Garante que cada slide ocupe 100% da largura */
-    height: 400px; /* Altura fixa para manter proporção */
+    height: 600px; /* Altura fixa para manter proporção */
     display: flex; /* Para centralizar a imagem dentro do slide */
     justify-content: center;
     align-items: center;
