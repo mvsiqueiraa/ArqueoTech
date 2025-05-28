@@ -3,30 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <title>Cadastrar Artefato - ArqueoTech</title>
-    <link rel="stylesheet" href="../css/artifact.css">
-</head>
+    <link rel="icon" type="image/png" href="../../public/assets/images/favicon.png"> <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet"> <link rel="stylesheet" href="../css/styles.css"> <link rel="stylesheet" href="../css/artifact.css"> </head>
 <body>
-<nav class="nav-content">
-    <div class="logo"><a href="index.html">ArqueoTech</a></div>
-    <ul class="nav-links">
-        <li><a href="index.html#treinamento">Identificação</a></li>
-        <li><a href="index.html#historia">História</a></li>
-        <li><a href="index.html#contato">Contato</a></li>
-        <li><a href="AddArtifact.html" class="active">+ Novo Artefato</a></li>
-        <li><a href="login.html" class="login-btn">Login</a></li>
-    </ul>
-</nav>
+    <nav>
+        <div class="nav-content">
+            <div class="logo"><a href="index.html" style="text-decoration: none; color: inherit;">ArqueoTech</a></div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="identificacao.html">Identificação</a></li>
+                <li><a href="AddArtifact.html" id="addArtifactLink" class="active">Novo Artefato</a></li>
+                <li><a href="gallery.html">Galeria</a></li>
+                <li><a href="index.html#historia">História</a></li>
+                <li><a href="index.html#contato">Contato</a></li>
+                <li id="userSection">
+                    </li>
+            </ul>
+        </div>
+    </nav>
 
     <main class="artifact-container">
         <h1 class="section-title">📸 Registrar Novo Artefato</h1>
         <p class="section-desc">Contribua com a comunidade arqueológica enviando seus registros e compartilhando a localização de seus vestígios!</p>
         <div class="upload-card">
-            <!-- Upload de Fotos -->
             <div class="upload-section">
                 <input type="file" id="photoUpload" multiple accept="image/*">
                 <div id="imagePreview" class="preview-grid"></div>
             </div>
-            <!-- Formulário de Dados -->
             <div class="form-section">
                 <div class="form-group">
                     <label for="description">Descrição:</label>
@@ -50,6 +52,11 @@
             </div>
         </div>
     </main>
-    <script src="../js/artifactUpload.js"></script>
-</body>
+
+    <footer> <p>Desenvolvido por mvsiqueira © 2025</p>
+    </footer>
+
+    <script src="../js/api.js" defer></script>
+    <script src="../js/auth.js" defer></script>
+    <script src="../js/artifactUpload.js"></script> </body>
 </html>
