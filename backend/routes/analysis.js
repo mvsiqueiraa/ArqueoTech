@@ -13,7 +13,7 @@ router.post('/register', async (req, res) => {
     try {
         const { name, email, password, institution } = req.body;
 
-        if (!institution) {
+        if (!institution) { // Validação para instituição
             return res.status(400).json({ message: 'Instituição é obrigatória' });
         }
 
@@ -32,10 +32,11 @@ router.post('/register', async (req, res) => {
         await user.save();
         res.status(201).json({ message: 'Usuário criado com sucesso' });
     } catch (error) {
+        // Seria bom logar o erro aqui também para o backend
+        console.error("Erro no registro:", error); // Adicione este log
         res.status(500).json({ message: 'Erro no servidor' });
     }
 });
-
 // Rota de login
 router.post('/login', async (req, res) => {
     try {
